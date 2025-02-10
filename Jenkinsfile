@@ -6,14 +6,9 @@ pipeline {
                 git 'https://github.com/srikarreddy5/CppAutomation.git'
             }
         }
-        stage('Build') {
+        stage('Check Workspace') {
             steps {
-                sh 'make'  # No cd needed
-            }
-        }
-        stage('Run Program') {
-            steps {
-                sh './program.out'  # No cd needed
+                sh 'ls -lah'  # List files in Jenkins workspace
             }
         }
     }
