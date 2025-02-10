@@ -3,24 +3,28 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                sh 'rm -rf CppAutomation'  
-                sh 'git clone https://github.com/srikarreddy5/CppAutomation.git CppAutomation'
+                git 'https://github.com/srikarreddy5/CppAutomation.git'
             }
         }
         stage('Check Workspace') {
             steps {
-                sh 'pwd'      # Check current directory
+                sh 'pwd'      # Print current directory
                 sh 'ls -lah'  # List files
             }
         }
         stage('Build') {
             steps {
-                sh 'cd CppAutomation && make'  # Now cd is needed
+                sh 'make'  # Adjust this if you're using CMake
             }
         }
-        stage('Run Program') {
+        stage('Test') {
             steps {
-                sh 'cd CppAutomation && ./program.out'
+                sh './run_tests.sh'  # Change to your actual test script
+            }
+        }
+        stage('Run') {
+            steps {
+                sh './program.out'  # Run the compiled program
             }
         }
     }
