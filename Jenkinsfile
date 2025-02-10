@@ -3,23 +3,17 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                sh 'git clone https://github.com/srikarreddy5/CppAutomation.git'
+                git 'https://github.com/srikarreddy5/CppAutomation.git'
             }
         }
         stage('Build') {
             steps {
-                sh '''
-                cd CppAutomation
-                make
-                '''
+                sh 'make'  # No cd needed
             }
         }
         stage('Run Program') {
             steps {
-                sh '''
-                cd CppAutomation
-                ./program.out
-                '''
+                sh './program.out'  # No cd needed
             }
         }
     }
